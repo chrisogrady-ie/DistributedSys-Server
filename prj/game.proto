@@ -1,0 +1,18 @@
+//python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. game.proto
+
+syntax = "proto3";
+
+service GameRound {
+  rpc guess_letter (ClientInput) returns (ServerOutput) {}
+}
+message ClientInput {
+  //server expects to receive
+  string single_guess = 1;
+}
+
+message ServerOutput {
+  //server will return a message and flag(bool) if all words have been guessed
+  //these can be accessed in the client through response.x
+  string message = 1;
+  bool game_continue = 2;
+}
